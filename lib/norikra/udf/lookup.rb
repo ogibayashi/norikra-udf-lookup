@@ -14,7 +14,7 @@ module Norikra
       # instance method
       def definition
         # function_name, Java Class Name (fqdn),    static function name
-        ["lookup", "com.linecorp.norikra.udf.Lookup", "lookup"]
+        ["lookup", "jp.gr.java_conf.ogibayashi.norikra.udf.Lookup", "lookup"]
       end
     end
 

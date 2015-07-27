@@ -1,8 +1,6 @@
 # Norikra::Udf::Lookup
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/norikra/udf/lookup`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Norikra UDF to lookup external data source. (Currently, only TSV file)
 
 ## Installation
 
@@ -22,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+norikra-client query add testquery "SELECT id, lookup('/tmp/lookuptest.tsv', cast(id as string), 'default value') as name, count(*) FROM test_stream.win:time_batch(1 min) GROUP BY id"
+```
 
 ## Development
 

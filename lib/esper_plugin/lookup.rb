@@ -1,5 +1,5 @@
 require 'java'
-java_package 'com.linecorp.norikra.udf'
+java_package 'jp.gr.java_conf.ogibayashi.norikra.udf'
 
 class Lookup  # FQDN: org.example.yourcompany.norikra.udf.MyUDF1
   @@lookup_table = nil
