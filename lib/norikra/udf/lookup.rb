@@ -5,7 +5,7 @@ require 'norikra/udf'
 module Norikra
   module UDF
 
-    class Lookup < Norikra::UDF::SingleRow
+    class LookupTsv < Norikra::UDF::SingleRow
       # class method
       def self.init
         require 'norikra-udf-lookup.jar'
@@ -14,7 +14,7 @@ module Norikra
       # instance method
       def definition
         # function_name, Java Class Name (fqdn),    static function name
-        ["lookup", "jp.gr.java_conf.ogibayashi.norikra.udf.Lookup", "lookup"]
+        ["lookup_tsv", "jp.gr.java_conf.ogibayashi.norikra.udf.Lookup", "lookup_tsv"]
       end
     end
 

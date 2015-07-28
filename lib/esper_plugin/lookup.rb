@@ -11,7 +11,7 @@ class Lookup  # FQDN: org.example.yourcompany.norikra.udf.MyUDF1
     Hash[data]
   end
 
-  def self.lookup(path,key,default_value)
+  def self.lookup_tsv(path,key,default_value)
     unless @@lookup_table
       @@lookup_table = self.read_tsv(path)
     end

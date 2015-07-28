@@ -3,8 +3,8 @@ include Norikra::UDFSpecHelper
 require 'norikra/udf/lookup' # this is your UDF definition file
 
 # for single row UDF
-describe Norikra::UDF::Lookup do
-  udf_function Norikra::UDF::Lookup
+describe Norikra::UDF::LookupTsv do
+  udf_function Norikra::UDF::LookupTsv
   TMP_TABLE_FILE = "/tmp/lookuptest.tsv"
   
   before do
@@ -15,11 +15,11 @@ describe Norikra::UDF::Lookup do
   end
   
   it 'Key found' do
-    expect(fcall(:lookup, TMP_TABLE_FILE, "key1","notfound")).to eql("hoge")
+    expect(fcall(:lookup_tsv, TMP_TABLE_FILE, "key1","notfound")).to eql("hoge")
   end
 
   it 'Key not found' do 
-    expect(fcall(:lookup, TMP_TABLE_FILE, "key5","notfound")).to eql("notfound")
+    expect(fcall(:lookup_tsv, TMP_TABLE_FILE, "key5","notfound")).to eql("notfound")
   end
 
   after do
