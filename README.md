@@ -20,17 +20,52 @@ Or install it yourself as:
 
 ## Usage
 
+
+### lookup_tsv(string, string, string)
+
+Parameters are: TSV file path, key to lookup, return value if the key was not found.
+
+Lookup key in TSV file and return corresponding value.
+
+For example, create such file with "key<tab>value" pairs.
+
 ```
-norikra-client query add testquery "SELECT id, lookup('/tmp/lookuptest.tsv', cast(id as string), 'default value') as name, count(*) FROM test_stream.win:time_batch(1 min) GROUP BY id"
+% cat /tmp/lookuptest.tsv 
+1       aaa
+2       bbb
+3       ccc
 ```
 
-## Development
+Register query with this UDF.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+SELECT
+  id, lookup_tsv('/tmp/lookuptest.tsv',id,'not found') as name, count(*) as cnt
+FROM
+  test_stream.win:time_batch(1 min)
+GROUP by id
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Send some events.
 
-## Contributing
+```
+% echo '{"id":"1"}' | norikra-client event send test_stream
+% echo '{"id":"2"}' | norikra-client event send test_stream
+% echo '{"id":"3"}' | norikra-client event send test_stream
+% echo '{"id":"4"}' | norikra-client event send test_stream
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/norikra-udf-lookup.
+Then, you will get there records.
 
+```
+{"time":"2015/07/28 12:13:24","query":"lookuptest","id":"3","cnt":1,"name":"ccc"}
+{"time":"2015/07/28 12:13:24","query":"lookuptest","id":"2","cnt":1,"name":"bbb"}
+{"time":"2015/07/28 12:13:24","query":"lookuptest","id":"1","cnt":1,"name":"aaa"}
+{"time":"2015/07/28 12:13:24","query":"lookuptest","id":"4","cnt":1,"name":"not found"}
+```
+
+## Copyright
+
+* Copyright (c) 2015- OGIBAYASHI Hironori
+* License
+    * GPL v2
