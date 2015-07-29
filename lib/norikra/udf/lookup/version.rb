@@ -1,7 +1,7 @@
 module Norikra
   module Udf
     module Lookup
-      VERSION = "0.0.1"
+      VERSION = "0.0.2"
     end
   end
 end
