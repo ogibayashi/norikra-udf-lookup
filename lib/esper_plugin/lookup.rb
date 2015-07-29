@@ -7,7 +7,7 @@ class Lookup
   @@next_update_check = nil
   
   def self.read_tsv(path)
-    info "Lookup#read_tsv Loading file : #{path}"
+    info "Lookup#read_tsv Loading file : #{path}" if @logger
     @@next_update_check = Time.now + FILE_UPDATE_CHECK_INTERVAL
     data = File.open(path).readlines.map do |line|
       line.chomp.split("\t")
