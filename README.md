@@ -55,7 +55,7 @@ Send some events.
 % echo '{"id":"4"}' | norikra-client event send test_stream
 ```
 
-Then, you will get there records.
+Then, you will get these records.
 
 ```
 {"time":"2015/07/28 12:13:24","query":"lookuptest","id":"3","cnt":1,"name":"ccc"}
@@ -63,6 +63,10 @@ Then, you will get there records.
 {"time":"2015/07/28 12:13:24","query":"lookuptest","id":"1","cnt":1,"name":"aaa"}
 {"time":"2015/07/28 12:13:24","query":"lookuptest","id":"4","cnt":1,"name":"not found"}
 ```
+
+### Reloading data
+
+This UDF checks the timestamp of TSV files every 60 seconds and reload them if they are updated.
 
 ## Copyright
 
